@@ -32,6 +32,7 @@ function assignLevels(marks, fs, nLevels) {
   const sorted = [...marks].sort((a, b) => a.X - b.X);
   const lastRight = new Array(nLevels).fill(-1e9);
   sorted.forEach(mk => {
+    if (mk.level != null) { const w0 = Math.max(textW(mk.label, fs), textW(mk.sub || '', fs * 0.8)) + 24; const l0 = mk.anchor === 'end' ? mk.X - w0 : (mk.anchor === 'start' ? mk.X : mk.X - w0 / 2); lastRight[mk.level] = Math.max(lastRight[mk.level], l0 + w0); return; }
     const w = Math.max(textW(mk.label, fs), textW(mk.sub || '', fs * 0.8)) + 24;
     const left = mk.anchor === 'end' ? mk.X - w : (mk.anchor === 'start' ? mk.X : mk.X - w / 2);
     let lvl = 0;
@@ -41,8 +42,8 @@ function assignLevels(marks, fs, nLevels) {
 }
 
 function profileSvg() {
-  const W = 2600, H = 1040;
-  const top = 250, bottom = 110, gap = 90, left = 120, right = 40;
+  const W = 2600, H = 1120;
+  const top = 380, bottom = 110, gap = 90, left = 120, right = 40;
   const ph = H - top - bottom;
   const panelW = W - left - right - gap;
   const bw = Math.round(panelW * 0.66), rw = panelW - bw;
@@ -94,7 +95,7 @@ function profileSvg() {
     { km: 56, label: '草坪頭管制哨', sub: '56 km・紅袋' , cutoff: true },
     { km: 76, label: '觀山', sub: '約 76 km' },
     { km: 86.2, label: '塔塔加夫妻樹', sub: '86 km・黑袋・12:00 關門', cutoff: true },
-    { km: 125, label: '合社 7-11', sub: '約 125 km' },
+    { km: 125, label: '和社 7-11', sub: '約 125 km' },
     { km: 142, label: '豐丘', sub: '約 142 km' },
     { km: 149, label: '水里坡', sub: '約 149 km' },
     { km: 165, label: '日月潭', sub: '約 165 km' },
@@ -102,14 +103,14 @@ function profileSvg() {
     { km: BIKE_END, label: 'T2 檢錄', sub: '15:50 關門', cutoff: true, anchor: 'end' },
   ].map(mk => ({ ...mk, X: xb(mk.km), Y: y(eleAt(mk.km)), color: mk.cutoff ? C.red : C.bike, anchor: mk.anchor || 'middle' }));
   const runMarks = [
-    { km: 0, label: 'T2', sub: '714 m', anchor: 'start' },
-    { km: 17.5, label: '清境高空步道', sub: '17.5 km・18:50', cutoff: true },
-    { km: 26, label: '翠峰', sub: '26 km・20:20・開放陪跑', cutoff: true },
-    { km: 33, label: '鳶峰', sub: '33 km・21:40・強制陪跑', cutoff: true },
-    { km: 40, label: '登山口', sub: '40 km・23:00', cutoff: true, anchor: 'end' },
-    { km: 42, label: '合歡主峰 3,417 m', sub: 'FINISH', finish: true, anchor: 'end' },
+    { km: 0, label: 'T2', sub: '714 m', anchor: 'start', level: 0 },
+    { km: 17.5, label: '清境高空步道', sub: '17.5 km・18:50', cutoff: true, level: 0 },
+    { km: 26, label: '翠峰', sub: '26 km・20:20・陪跑', cutoff: true, level: 3 },
+    { km: 33, label: '鳶峰', sub: '33 km・21:40・強制', cutoff: true, level: 2 },
+    { km: 40, label: '登山口', sub: '40 km・23:00', cutoff: true, anchor: 'end', level: 1 },
+    { km: 42, label: '合歡主峰', sub: 'FINISH 3,417 m', finish: true, anchor: 'end', level: 0 },
   ].map(mk => ({ ...mk, X: xr(mk.km), Y: y(runEleAt(mk.km)), color: mk.finish ? C.gold : (mk.cutoff ? C.red : C.run), anchor: mk.anchor || 'middle' }));
-  assignLevels(bikeMarks, 28, 3); assignLevels(runMarks, 28, 3);
+  assignLevels(bikeMarks, 28, 3); assignLevels(runMarks, 28, 4);
   const drawMarks = marks => marks.forEach(mk => {
     const ly = 120 + mk.level * 62; // label block top
     s += `<line x1="${mk.X}" x2="${mk.X}" y1="${mk.Y}" y2="${ly + 46}" stroke="${mk.color}" stroke-width="2" stroke-opacity="0.55"/>`;
@@ -145,20 +146,21 @@ function mapSvg() {
   s += `<path d="${dr}" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/><path d="${dr}" fill="none" stroke="${C.run}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="22 14"/>`;
   const label = (lat, lon, text, sub, color, dx, dy, anchor, big) => {
     s += `<circle cx="${px(lon)}" cy="${py(lat)}" r="${big ? 16 : 12}" fill="${color}" stroke="#FFFFFF" stroke-width="5"/>`;
-    s += `<text x="${px(lon) + dx}" y="${py(lat) + dy}" text-anchor="${anchor}" font-size="${big ? 44 : 36}" font-weight="700" fill="${C.ink}">${esc(text)}</text>`;
-    if (sub) s += `<text x="${px(lon) + dx}" y="${py(lat) + dy + 38}" text-anchor="${anchor}" font-size="28" fill="${C.ink2}">${esc(sub)}</text>`;
+    const halo = 'paint-order="stroke" stroke="#F6F8FA" stroke-width="10" stroke-linejoin="round"';
+    s += `<text x="${px(lon) + dx}" y="${py(lat) + dy}" text-anchor="${anchor}" font-size="${big ? 44 : 36}" font-weight="700" fill="${C.ink}" ${halo}>${esc(text)}</text>`;
+    if (sub) s += `<text x="${px(lon) + dx}" y="${py(lat) + dy + 38}" text-anchor="${anchor}" font-size="28" fill="${C.ink2}" ${halo}>${esc(sub)}</text>`;
   };
   const near = km => { let b = bike[0]; for (const p of bike) if (Math.abs(p.km - km) < Math.abs(b.km - km)) b = p; return b; };
   label(23.8489, 120.9302, '日月潭 伊達邵碼頭', 'START 06:00・游泳 3.8 km', C.navy, 26, -24, 'start', true);
-  label(23.5123, 120.8910, '塔塔加夫妻樹', '86 km 折返・12:00 關門・黑袋', C.red, 26, -8, 'start', true);
+  label(23.5123, 120.8910, '塔塔加夫妻樹', '86 km 折返・12:00 關門・黑袋', C.red, 30, 46, 'start', true);
   const l1 = near(33.5); label(l1.lat, l1.lon, '信義 7-11', '約 33 km／回程約 139 km', C.bike, -24, 8, 'end');
-  const l2 = near(56); label(l2.lat, l2.lon, '草坪頭管制哨', '56 km・紅袋・禁行區起點', C.red, 26, -6, 'start');
+  const l2 = near(56); label(l2.lat, l2.lon, '草坪頭管制哨', '56 km・紅袋・禁行區起點', C.red, -30, -10, 'end');
   const l3 = near(142); label(l3.lat, l3.lon, '豐丘', '約 142 km', C.bike, 26, 40, 'start');
   const l4 = near(149); label(l4.lat, l4.lon, '水里坡', '約 149 km', C.bike, -24, -4, 'end');
   const l5 = near(185); label(l5.lat, l5.lon, '埔里高工', '約 185 km', C.bike, -24, 44, 'end');
   label(24.0039, 121.0869, 'T2', '196.7 km・15:50 關門・檢錄', C.red, 26, 56, 'start', true);
   label(24.0560, 121.1610, '清境高空步道', '17.5 km・18:50', C.run, 30, 16, 'start');
-  label(24.1030, 121.1980, '翠峰', '26 km・20:20・開放陪跑', C.run, -30, 0, 'end');
+  label(24.1030, 121.1980, '翠峰', '26 km・20:20・開放陪跑', C.run, -30, -26, 'end');
   label(24.1190, 121.2330, '鳶峰', '33 km・21:40・強制陪跑', C.run, 30, 54, 'start');
   label(24.1330, 121.2680, '昆陽・主峰登山口', '40 km・23:00', C.run, 30, -30, 'start');
   label(24.1416, 121.2714, '合歡主峰 3,417 m', 'FINISH', C.gold, -30, -40, 'end', true);
@@ -176,7 +178,7 @@ function mapSvg() {
 
 
 function runOnlySvg() {
-  const W = 1500, H = 1000; const left = 110, right = 60, top = 230, bottom = 100;
+  const W = 1500, H = 1080; const left = 110, right = 60, top = 330, bottom = 100;
   const pw = W - left - right, ph = H - top - bottom;
   const y = ele => top + ph - ((ele - 500) / 3100) * ph; const x = km => left + (km / 42) * pw;
   let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${FONT}"><rect width="${W}" height="${H}" fill="${C.surface}"/>`;
@@ -190,17 +192,17 @@ function runOnlySvg() {
   for (let k = 0; k <= 40; k += 5) s += `<line x1="${x(k)}" x2="${x(k)}" y1="${y(500)}" y2="${y(500) + 10}" stroke="${C.muted}" stroke-width="2"/><text x="${x(k)}" y="${y(500) + 44}" text-anchor="middle" font-size="26" fill="${C.muted}">${k}</text>`;
   s += `<text x="${W - right}" y="${y(500) + 84}" text-anchor="end" font-size="24" fill="${C.muted}">跑步累積 km（依路標海拔繪製之示意剖面）</text>`;
   const marks = [
-    { km: 0, label: 'T2 全家仁愛霧社店', sub: '約 714 m・15:50 關門', anchor: 'start', color: C.red, cutoff: true },
-    { km: 9, label: '霧社', sub: '約 1,148 m', anchor: 'middle', color: C.run },
-    { km: 17.5, label: '清境高空步道', sub: '18:50 關門・補給葡萄', anchor: 'middle', color: C.red, cutoff: true },
-    { km: 23, label: '梅峰', sub: '約 2,100 m', anchor: 'middle', color: C.run },
-    { km: 26, label: '翠峰', sub: '20:20 關門・開放陪跑・換衣', anchor: 'middle', color: C.red, cutoff: true },
-    { km: 33, label: '鳶峰', sub: '21:40 關門・強制陪跑・熱食', anchor: 'middle', color: C.red, cutoff: true },
-    { km: 38, label: '昆陽', sub: '約 3,085 m・接駁車站', anchor: 'middle', color: C.run },
-    { km: 40, label: '主峰登山口', sub: '23:00 關門', anchor: 'end', color: C.red, cutoff: true },
-    { km: 42, label: '合歡主峰 3,417 m', sub: 'FINISH', anchor: 'end', color: C.gold, finish: true },
+    { km: 0, label: 'T2 全家仁愛賽德克店', sub: '約 714 m・15:50 關門', anchor: 'start', color: C.red, cutoff: true, level: 1 },
+    { km: 9, label: '霧社', sub: '約 1,148 m', anchor: 'middle', color: C.run, level: 0 },
+    { km: 17.5, label: '清境高空步道', sub: '18:50 關門・換 T 恤・葡萄', anchor: 'middle', color: C.red, cutoff: true, level: 2 },
+    { km: 23, label: '梅峰', sub: '約 2,100 m', anchor: 'middle', color: C.run, level: 0 },
+    { km: 26, label: '翠峰', sub: '20:20 關門・開放陪跑・換跑褲', anchor: 'middle', color: C.red, cutoff: true, level: 1 },
+    { km: 33, label: '鳶峰', sub: '21:40 關門・強制陪跑・長褲外套', anchor: 'middle', color: C.red, cutoff: true, level: 3 },
+    { km: 38, label: '昆陽', sub: '約 3,085 m・接駁車站', anchor: 'middle', color: C.run, level: 1 },
+    { km: 40, label: '主峰登山口', sub: '23:00 關門', anchor: 'end', color: C.red, cutoff: true, level: 2 },
+    { km: 42, label: '合歡主峰 3,417 m', sub: 'FINISH', anchor: 'end', color: C.gold, finish: true, level: 0 },
   ].map(mk => ({ ...mk, X: x(mk.km), Y: y(runEleAt(mk.km)) }));
-  assignLevels(marks, 28, 3);
+  assignLevels(marks, 28, 4);
   marks.forEach(mk => {
     const ly = 70 + mk.level * 62;
     s += `<line x1="${mk.X}" x2="${mk.X}" y1="${mk.Y}" y2="${ly + 46}" stroke="${mk.color}" stroke-width="2" stroke-opacity="0.55"/>`;
