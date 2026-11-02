@@ -9,6 +9,8 @@ const ASSETS = path.join(__dirname, 'assets');
 const PHOTOS = path.join(__dirname, 'photos');
 const icon = (name, color = 'white') => path.join(ASSETS, `icon_${name}_${color}.png`);
 const photoPath = f => path.join(PHOTOS, f);
+const PHOTO_MAP = fs.existsSync(path.join(__dirname, 'photo_map.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname, 'photo_map.json'), 'utf8')) : {};
+const crewPhoto = f => (f && fs.existsSync(path.join(PHOTOS, 'crew', f))) ? path.join(PHOTOS, 'crew', f) : null;
 
 const THEME = {
   name: 'FXT 2026 Crew',
@@ -178,17 +180,41 @@ pres.addSection({ title: '開場' });
     cardHeader(s, x, y, w, 0.9, e[4]);
     T(s, e[0], { x: x + 0.15, y: y + 0.08, w: w - 0.3, h: 0.5, fontSize: 22, bold: true, color: WHITE });
     T(s, 'FXT ' + e[1], { x: x + 0.15, y: y + 0.55, w: w - 0.3, h: 0.3, fontSize: 11, color: WHITE });
-    // photo placeholder
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.15, y: y + 1.05, w: w - 0.3, h: 2.2, rectRadius: 0.1, fill: { color: CARD }, line: { color: 'B8C2CE', width: 1, dashType: 'dash' } });
-    s.addImage({ path: icon('camera', 'gray'), x: x + w / 2 - 0.25, y: y + 1.75, w: 0.5, h: 0.5 });
-    T(s, '大頭的照片', { x: x + 0.15, y: y + 2.35, w: w - 0.3, h: 0.3, fontSize: 10, color: MUTED, align: 'center' });
+    const yp = crewPhoto((PHOTO_MAP.years || {})[e[0]]);
+    if (yp) {
+      s.addImage({ path: yp, x: x + 0.15, y: y + 1.05, w: w - 0.3, h: 2.2, sizing: { type: 'cover', w: w - 0.3, h: 2.2 } });
+    } else {
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.15, y: y + 1.05, w: w - 0.3, h: 2.2, rectRadius: 0.1, fill: { color: CARD }, line: { color: 'B8C2CE', width: 1, dashType: 'dash' } });
+      s.addImage({ path: icon('camera', 'gray'), x: x + w / 2 - 0.25, y: y + 1.75, w: 0.5, h: 0.5 });
+      T(s, '大頭的照片', { x: x + 0.15, y: y + 2.35, w: w - 0.3, h: 0.3, fontSize: 10, color: MUTED, align: 'center' });
+    }
     T(s, e[2], { x: x + 0.15, y: y + 3.4, w: w - 0.3, h: 0.3, fontSize: 12, bold: true, color: INK });
     T(s, e[3], { x: x + 0.15, y: y + 3.72, w: w - 0.3, h: 0.7, fontSize: 11, color: HEX.dk2 });
   });
   card(s, 0.5, 6.0, 12.33, 0.9, { fill: CARD });
   iconCircle(s, 0.7, 6.2, 0.5, 'clock', MUTED);
-  T(s, '2024 停辦一年。六年、五場、同一個目標。照片請放進 Drive「FXT2026 簡報素材」資料夾，標上年份，我會一張張放進對應的格子。', { x: 1.35, y: 6.0, w: 11.3, h: 0.9, fontSize: 12.5, color: INK, valign: 'middle' });
+  T(s, (PHOTO_MAP.years ? '2024 停辦一年。六年、五場、同一個目標——這條路的每一年都有人在旁邊。' : '2024 停辦一年。六年、五場、同一個目標。照片請放進 Drive「FXT2026 簡報素材」資料夾，標上年份，我會一張張放進對應的格子。'), { x: 1.35, y: 6.0, w: 11.3, h: 0.9, fontSize: 12.5, color: INK, valign: 'middle' });
   s.addNotes('歷屆日期來源：2020 FXT Race Manual（11/27 花蓮）、2022 選手手冊（11/25）、2025 選手手冊（11/14）、2026 選手手冊（11/13）；2021、2023 僅知 11 月。照片格待選手提供照片後替換。');
+}
+
+// 3b. 回憶牆（有照片才出現）
+if (PHOTO_MAP.hero && crewPhoto(PHOTO_MAP.hero.file)) {
+  const s = pres.addSlide({ masterName: 'BLANK', sectionTitle: section });
+  photo(s, path.relative(PHOTOS, crewPhoto(PHOTO_MAP.hero.file)), 0, 0, W, H);
+  rect(s, 0, 4.6, W, 2.9, '000000', { fill: { color: '000000', transparency: 35 }, line: { color: '000000', width: 0 } });
+  T(s, PHOTO_MAP.hero.line || '如果沒有天賦，那就一直重複。', { x: 0.8, y: 4.9, w: 11.7, h: 1.0, fontSize: 36, bold: true, color: WHITE });
+  T(s, PHOTO_MAP.hero.caption || '', { x: 0.8, y: 5.95, w: 11.7, h: 0.5, fontSize: 14, color: 'E6ECF2' });
+}
+if (PHOTO_MAP.wall && PHOTO_MAP.wall.length) {
+  const s = slide('CONTENT', PHOTO_MAP.wallTitle || '六年，一直重複');
+  const items = PHOTO_MAP.wall.filter(w => crewPhoto(w.file)).slice(0, 8);
+  const cols = items.length <= 4 ? items.length : 4, rows = Math.ceil(items.length / cols);
+  const gw = (12.33 - (cols - 1) * 0.15) / cols, gh = (5.55 - (rows - 1) * 0.15) / rows;
+  items.forEach((it, i) => {
+    const x = 0.5 + (i % cols) * (gw + 0.15), y = 1.3 + Math.floor(i / cols) * (gh + 0.15);
+    s.addImage({ path: crewPhoto(it.file), x, y, w: gw, h: gh, sizing: { type: 'cover', w: gw, h: gh } });
+    if (it.label) { rect(s, x, y + gh - 0.38, gw, 0.38, '000000', { fill: { color: '000000', transparency: 40 }, line: { color: '000000', width: 0 } }); T(s, it.label, { x: x + 0.1, y: y + gh - 0.38, w: gw - 0.2, h: 0.38, fontSize: 10.5, bold: true, color: WHITE, valign: 'middle' }); }
+  });
 }
 
 // 4. 什麼是 FXT
@@ -454,6 +480,33 @@ divider('PART 2', '車隊編組與角色', '三台補給車加一台親友專車
   card(s, 0.5, 6.35, 12.33, 0.55, { fill: 'FFF4F4', line: RED, lineW: 1 });
   T(s, '手冊規定「每位選手僅限一輛官方認定補給車，所有補給只能由該車進行」。第二車在和社的補給方式請在會議中確認並向大會釐清。', { x: 0.65, y: 6.35, w: 12.1, h: 0.55, fontSize: 11, bold: true, color: RED, valign: 'middle' });
   s.addNotes('成員分配沿用原簡報「補給車成員與分工」。任務描述依原簡報各補給點備註與 2026 手冊規則整理，供會議討論。');
+}
+
+// 12b. 我們的人
+{
+  const s = slide('CONTENT', '我們的人：三台補給車、一台親友專車、一位選手');
+  const people = [
+    ['大頭', '選手・022', INK], ['小麥', '陪跑員（背心＋手環）・RAV4', GREEN], ['大顆頭', 'RAV4 駕駛・車長', RED], ['金剛', '補給手（背心）・RAV4', ORANGE], ['聖恩', 'RAV4・補給支援', RED],
+    ['傑哥', 'GLC 250 駕駛・車長', TEAL], ['佳惠', 'GLC 250・支援', TEAL], ['珮淳', 'GLC 250・支援', TEAL], ['攝影師', 'GLC 250・影像紀錄', TEAL],
+    ['小朱', 'CRV 駕駛・器材', NAVY], ['阿徹', 'CRV・攝影組', NAVY], ['俊儀', 'MODEL Y 駕駛', GOLD], ['小O', 'MODEL Y・親友團', GOLD], ['本丸', 'MODEL Y・親友團', GOLD],
+  ];
+  const cols = 7, tw = 1.72, gapx = 0.047, th = 2.6;
+  people.forEach((pp, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const x = 0.5 + col * (tw + gapx), y = 1.3 + row * (th + 0.2);
+    card(s, x, y, tw, th, { fill: CARD });
+    const d = 1.15, cx = x + (tw - d) / 2, cy = y + 0.2;
+    const pf = crewPhoto((PHOTO_MAP.crew || {})[pp[0]]);
+    if (pf) {
+      s.addImage({ path: pf, x: cx, y: cy, w: d, h: d, sizing: { type: 'cover', w: d, h: d }, rounding: true });
+    } else {
+      s.addShape(pres.shapes.OVAL, { x: cx, y: cy, w: d, h: d, fill: { color: pp[2] }, line: { color: WHITE, width: 2 } });
+      T(s, pp[0].slice(0, 1), { x: cx, y: cy, w: d, h: d, fontSize: 30, bold: true, color: WHITE, align: 'center', valign: 'middle' });
+    }
+    T(s, pp[0], { x: x + 0.08, y: y + 1.45, w: tw - 0.16, h: 0.4, fontSize: 15, bold: true, align: 'center', valign: 'middle' });
+    T(s, pp[1], { x: x + 0.1, y: y + 1.85, w: tw - 0.2, h: 0.65, fontSize: 10, color: HEX.dk2, align: 'center' });
+  });
+  T(s, '照片待補：隊友照片放進 Drive「FXT2026 簡報素材」後會替換圓形頭像。', { x: 0.5, y: 6.82, w: 12.3, h: 0.26, fontSize: 9.5, color: MUTED });
 }
 
 // 13. 角色與職責
