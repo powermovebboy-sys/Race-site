@@ -141,7 +141,57 @@ pres.addSection({ title: '開場' });
   s.addNotes('封面。照片取自 2025 FXT 選手手冊（大會官方影像）。數據來源：2026 FXT 選手手冊。');
 }
 
-// 2. 什麼是 FXT
+// 2. 通往夢想的最後一哩路（主題＋開場影片）
+{
+  const s = pres.addSlide({ masterName: 'DARK', sectionTitle: section });
+  s.addText('通往夢想的最後一哩路', { placeholder: 'title' });
+  T(s, '「如果沒有天賦，\n那就一直重複。」', { x: 0.5, y: 1.45, w: 5.7, h: 1.9, fontSize: 34, bold: true, color: WHITE, valign: 'top' });
+  T(s, '大頭 ・ 號碼 022 ・ Formosa Xtreme Triathlon VI', { x: 0.5, y: 3.45, w: 5.7, h: 0.4, fontSize: 14, bold: true, color: GOLD });
+  T(s, bullets(['從 2020 年 FXT 誕生開始，這條路走了六年', '2024 停辦一年；2025 起賽道改寫：日月潭 → 塔塔加 → 合歡主峰', '2026.11.13，第六屆。登山口到主峰的最後 1.8 公里，我們一起走完']), { x: 0.5, y: 4.0, w: 5.7, h: 1.7, fontSize: 13.5, color: 'DCE3EA', paraSpaceAfter: 6 });
+  T(s, '這不是終點，是通往夢想的最後一哩路。', { x: 0.5, y: 5.9, w: 5.7, h: 0.5, fontSize: 15, italic: true, color: 'C9D3DE' });
+  // online video (YouTube) — plays in PowerPoint with internet
+  s.addMedia({ type: 'online', link: 'https://www.youtube.com/embed/yXOe-3TqXQ8', x: 6.6, y: 1.35, w: 6.23, h: 3.5 });
+  T(s, '開場影片（線上播放，簡報時需連網）', { x: 6.6, y: 4.95, w: 6.23, h: 0.3, fontSize: 10, color: 'A9B4C2' });
+  card(s, 6.6, 5.4, 6.23, 1.45, { fill: '14263F', line: '2A4160', lineW: 1 });
+  iconCircle(s, 6.8, 5.6, 0.5, 'mountain', GOLD, 'navy');
+  T(s, '今天要講的事', { x: 7.45, y: 5.55, w: 5.2, h: 0.3, fontSize: 12, bold: true, color: GOLD });
+  T(s, '這條路長什麼樣子 → 規則紅線 → 誰在哪台車、做什麼 → 每一站給什麼 → 夜間高山 → 住宿與回程', { x: 7.45, y: 5.88, w: 5.2, h: 0.9, fontSize: 11.5, color: 'E6ECF2' });
+  s.addNotes('開場影片連結由選手提供：https://youtu.be/yXOe-3TqXQ8 。主題句「如果沒有天賦，那就一直重複」為選手指定。');
+}
+
+// 3. 六屆的路：2020 → 2026
+{
+  const s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: section });
+  s.addText('六屆的路：2020 → 2026', { placeholder: 'title' });
+  const eds = [
+    ['2020', 'I', '11.27 花蓮', '秀姑巒溪 → 合歡主峰', NAVY],
+    ['2021', 'II', '11 月 花蓮', '同路線', NAVY],
+    ['2022', 'III', '11.25 花蓮', '同路線', NAVY],
+    ['2023', 'IV', '11 月 花蓮', '同路線', NAVY],
+    ['2025', 'V', '11.14 日月潭', '新賽道・242 km', TEAL],
+    ['2026', 'VI', '11.13 日月潭', '最後一哩路', RED],
+  ];
+  const w = 1.95, gap = 0.12, x0 = 0.5;
+  eds.forEach((e, i) => {
+    const x = x0 + i * (w + gap), y = 1.3, h = 4.55;
+    card(s, x, y, w, h, { fill: WHITE, line: e[4], lineW: 1.5 });
+    cardHeader(s, x, y, w, 0.9, e[4]);
+    T(s, e[0], { x: x + 0.15, y: y + 0.08, w: w - 0.3, h: 0.5, fontSize: 22, bold: true, color: WHITE });
+    T(s, 'FXT ' + e[1], { x: x + 0.15, y: y + 0.55, w: w - 0.3, h: 0.3, fontSize: 11, color: WHITE });
+    // photo placeholder
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.15, y: y + 1.05, w: w - 0.3, h: 2.2, rectRadius: 0.1, fill: { color: CARD }, line: { color: 'B8C2CE', width: 1, dashType: 'dash' } });
+    s.addImage({ path: icon('camera', 'gray'), x: x + w / 2 - 0.25, y: y + 1.75, w: 0.5, h: 0.5 });
+    T(s, '大頭的照片', { x: x + 0.15, y: y + 2.35, w: w - 0.3, h: 0.3, fontSize: 10, color: MUTED, align: 'center' });
+    T(s, e[2], { x: x + 0.15, y: y + 3.4, w: w - 0.3, h: 0.3, fontSize: 12, bold: true, color: INK });
+    T(s, e[3], { x: x + 0.15, y: y + 3.72, w: w - 0.3, h: 0.7, fontSize: 11, color: HEX.dk2 });
+  });
+  card(s, 0.5, 6.0, 12.33, 0.9, { fill: CARD });
+  iconCircle(s, 0.7, 6.2, 0.5, 'clock', MUTED);
+  T(s, '2024 停辦一年。六年、五場、同一個目標。照片請放進 Drive「FXT2026 簡報素材」資料夾，標上年份，我會一張張放進對應的格子。', { x: 1.35, y: 6.0, w: 11.3, h: 0.9, fontSize: 12.5, color: INK, valign: 'middle' });
+  s.addNotes('歷屆日期來源：2020 FXT Race Manual（11/27 花蓮）、2022 選手手冊（11/25）、2025 選手手冊（11/14）、2026 選手手冊（11/13）；2021、2023 僅知 11 月。照片格待選手提供照片後替換。');
+}
+
+// 4. 什麼是 FXT
 {
   const s = slide('CONTENT', '這是一場什麼樣的比賽？');
   photo(s, 'hb-020-059.jpg', 0.5, 1.3, 5.6, 3.1);
@@ -772,7 +822,7 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
     ['11/12（四）', '攝影器材車 CRV', '金剛（駕駛）、小朱、聖恩、大顆頭', '同上；載自行車'],
     ['11/12（四）', '攝影師座車 HELIX', '阿徹（駕駛）、攝影師', '同上'],
     ['11/13（五）', '親友專車 MODEL Y', '俊儀（駕駛）、小O、本丸', '中午南下，直奔 T2 見證歷史'],
-    ['11/13 賽事', 'RAV4／GLC 250／CRV', '大顆頭／傑哥／小朱 駕駛', '賽事分配見第 12 頁；攝影師改搭 GLC'],
+    ['11/13 賽事', 'RAV4／GLC 250／CRV', '大顆頭／傑哥／小朱 駕駛', '賽事分配見第 14 頁；攝影師改搭 GLC'],
     ['11/14（六）', '攝影器材車 CRV', '金剛（駕駛）不載人', '頒獎前離開，載自行車與冰箱回工作室'],
     ['11/14（六）', '親友專車 MODEL Y', '俊儀（駕駛）、小O、本丸、小朱', '頒獎典禮後返北'],
     ['11/14（六）', '主補給車 RAV4', '大頭（駕駛）、小麥、大顆頭、聖恩', '頒獎典禮後返北'],
@@ -781,8 +831,8 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
   tbl(s, rows, { x: 0.5, y: 1.25, w: 8.2, colW: [1.15, 1.85, 2.5, 2.7], fontSize: 10.5, headFill: NAVY, rowH: 0.47, bold0: true });
   const x = 9.0, w = 3.83;
   const info = [
-    ['hotel', BLUE, '賽前住宿（11/12）', '日月潭力麗溫德姆溫泉酒店（報到、說明會、T1 都近）。分房表待提供。'],
-    ['bed', TEAL, '賽後住宿（11/13 夜）', '清境地區；分房表待提供。終點距台北約 270 km。'],
+    ['hotel', BLUE, '賽前住宿（11/12）', '日月潭力麗溫德姆溫泉酒店＋湧泉民宿（攝影師）。分房見下一頁。'],
+    ['bed', TEAL, '賽後住宿（11/13 夜）', '清境 白雲渡假山莊。分房見下一頁。終點距台北約 270 km。'],
     ['car', ORANGE, '車程參考', '塔塔加 → 霧社約 3 小時以上（含山路）；霧社 → 昆陽約 1.5 小時。提早出發，避開管制。'],
     ['calendar', GOLD, '交通管制與施工', '11/13 06:00–24:00 台14 58.5–80K、台14甲 0–31.5K、台21 68–141K 志工疏導（非全線封閉）。台21 132.3K 和社二號明隧道災修：每整點放行約 10 分鐘（12–13 時不管制），賽日是否暫停待確認。'],
   ];
@@ -796,7 +846,39 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
   s.addNotes('車輛與成員分配依選手 11/2 提供之分配表；住宿與距離來自 2026 手冊「交通與住宿資訊」；交通管制來自公路局公告與新聞。車程為估計值。');
 }
 
-// 27. 裝備與物資清單
+// 27b. 住宿分房
+{
+  const s = slide('CONTENT', '住宿分房：11/12 日月潭、11/13 清境');
+  const roomCard = (x, y, w, h, title, sub, rooms, color) => {
+    card(s, x, y, w, h, { fill: WHITE, line: color, lineW: 1.5 });
+    cardHeader(s, x, y, w, 0.95, color);
+    iconCircle(s, x + 0.2, y + 0.2, 0.55, 'hotel', WHITE, color === TEAL ? 'teal' : 'navy');
+    T(s, title, { x: x + 0.9, y: y + 0.12, w: w - 1.05, h: 0.45, fontSize: 16, bold: true, color: WHITE, valign: 'middle' });
+    T(s, sub, { x: x + 0.9, y: y + 0.56, w: w - 1.05, h: 0.3, fontSize: 10.5, color: WHITE });
+    rooms.forEach((r, i) => {
+      const ry = y + 1.15 + i * 0.86;
+      pill(s, x + 0.25, ry + 0.1, 1.45, 0.34, r[0], color, WHITE, 10.5);
+      const names = r[1];
+      names.forEach((nm, j) => pill(s, x + 1.8 + (j % 4) * 1.02, ry + (j < 4 ? 0.1 : 0.5), 0.95, 0.32, nm, CARD, INK, 11));
+    });
+  };
+  roomCard(0.5, 1.3, 6.05, 5.1, '11/12（四）日月潭', '力麗溫德姆溫泉酒店・報到、說明會、T1 皆在附近', [
+    ['雙人房', ['大頭', '小麥']],
+    ['雙人房', ['佳惠', '珮淳']],
+    ['三人房', ['小朱', '阿徹', '傑哥']],
+    ['三人房', ['金剛', '大顆頭', '聖恩']],
+    ['湧泉民宿 單人', ['攝影師']],
+  ], NAVY);
+  roomCard(6.78, 1.3, 6.05, 5.1, '11/13（五）清境', '白雲渡假山莊・完賽下山後直接入住，11/14 09:00 愛立家頒獎', [
+    ['雙人房＋1 床', ['大頭', '小麥', '大顆頭']],
+    ['雙人房＋1 床', ['佳惠', '珮淳', '本丸']],
+    ['六人房＋2 床', ['阿徹', '攝影師', '俊儀', '嘉傑', '小朱', '聖恩', '金剛', '小O']],
+  ], TEAL);
+  T(s, '分房依選手 11/2 提供之名單。嘉傑＝傑哥（待確認）。11/13 深夜從昆陽下山約 1 小時到清境，先把鑰匙與房號發給每台車的車長。', { x: 0.5, y: 6.55, w: 12.3, h: 0.45, fontSize: 10.5, color: HEX.dk2 });
+  s.addNotes('住宿分房：選手 2026/11/2 提供。11/12 溫德姆四間＋湧泉民宿一間；11/13 白雲渡假山莊三間。');
+}
+
+// 28. 裝備與物資清單
 {
   const s = slide('CONTENT', '裝備與物資總清單（出發前逐項打勾）');
   const cols = [
@@ -870,8 +952,9 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
   const s = pres.addSlide({ masterName: 'BLANK', sectionTitle: section });
   photo(s, 'hb-001-000.jpg', 0, 0, W, H);
   rect(s, 0, 0, W, H, '000000', { fill: { color: '000000', transparency: 40 }, line: { color: '000000', width: 0 } });
-  T(s, '#See you at the top.', { x: 0.8, y: 1.2, w: 11.7, h: 1.2, fontSize: 54, bold: true, color: WHITE });
-  T(s, '合歡主峰 3,417 m・登山口 23:00 關門前通過，一起走完最後 1.8 km', { x: 0.8, y: 2.4, w: 11.7, h: 0.5, fontSize: 18, color: GOLD, bold: true });
+  T(s, '如果沒有天賦，那就一直重複。', { x: 0.8, y: 1.0, w: 11.7, h: 1.1, fontSize: 44, bold: true, color: WHITE });
+  T(s, '#See you at the top. ・ 合歡主峰 3,417 m ・ 登山口 23:00 前通過，一起走完最後 1.8 km', { x: 0.8, y: 2.1, w: 11.7, h: 0.45, fontSize: 16, color: GOLD, bold: true });
+  T(s, '大頭 022 ｜ 小麥・大顆頭・金剛・聖恩 ｜ 傑哥・佳惠・珮淳・攝影師 ｜ 小朱・阿徹 ｜ 俊儀・小O・本丸', { x: 0.8, y: 2.6, w: 11.7, h: 0.5, fontSize: 14, color: 'E6ECF2' });
   const three = [['vest', '只有背心能碰選手'], ['parking', '停白線內・車外・車頭'], ['clock', '關門前 15 分鐘預警']];
   three.forEach((t, i) => {
     const x = 0.8 + i * 4.0;
