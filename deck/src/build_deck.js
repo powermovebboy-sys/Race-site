@@ -127,8 +127,8 @@ pres.addSection({ title: '開場' });
 // 1. COVER
 {
   const s = pres.addSlide({ masterName: 'BLANK', sectionTitle: section });
-  photo(s, 'cover_summit.jpg', 0, 0, W, 5.6);
-  rect(s, 0, 0, W, 5.6, '000000', { fill: { color: '000000', transparency: 35 }, line: { color: '000000', width: 0 } });
+  photo(s, PHOTO_MAP.cover || 'cover_summit.jpg', 0, 0, W, 5.6);
+  rect(s, 0, 0, W, 5.6, '000000', { fill: { color: '000000', transparency: PHOTO_MAP.cover ? 45 : 35 }, line: { color: '000000', width: 0 } });
   s.addImage({ path: photoPath('logo_fxt_xtri.jpg'), x: 0.6, y: 0.45, w: 3.0, h: 0.64 });
   T(s, 'FORMOSA XTREME TRIATHLON VI ・ 2026.11.13（五）', { x: 0.6, y: 2.55, w: 12, h: 0.45, fontSize: 16, bold: true, color: GOLD, charSpacing: 2 });
   T(s, '2026 FXT 補給作戰計畫', { x: 0.6, y: 3.0, w: 12, h: 1.1, fontSize: 52, bold: true, color: WHITE });
