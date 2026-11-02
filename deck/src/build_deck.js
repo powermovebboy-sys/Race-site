@@ -506,7 +506,7 @@ divider('PART 2', '車隊編組與角色', '三台補給車加一台親友專車
     T(s, pp[0], { x: x + 0.08, y: y + 1.45, w: tw - 0.16, h: 0.4, fontSize: 15, bold: true, align: 'center', valign: 'middle' });
     T(s, pp[1], { x: x + 0.1, y: y + 1.85, w: tw - 0.2, h: 0.65, fontSize: 10, color: HEX.dk2, align: 'center' });
   });
-  T(s, '照片待補：隊友照片放進 Drive「FXT2026 簡報素材」後會替換圓形頭像。', { x: 0.5, y: 6.82, w: 12.3, h: 0.26, fontSize: 9.5, color: MUTED });
+  T(s, '頭像來自各自提供的照片；攝影師照片待補。', { x: 0.5, y: 6.82, w: 12.3, h: 0.26, fontSize: 9.5, color: MUTED });
 }
 
 // 13. 角色與職責
