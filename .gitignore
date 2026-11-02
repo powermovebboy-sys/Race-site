@@ -1,0 +1,6 @@
+node_modules/
+deck/src/assets/icon_*.png
+deck/src/assets/_prev_*.jpg
+deck/render/
+*.pdf
+.DS_Store
