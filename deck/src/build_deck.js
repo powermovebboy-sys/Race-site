@@ -149,7 +149,7 @@ pres.addSection({ title: '開場' });
   s.addText('通往夢想的最後一哩路', { placeholder: 'title' });
   T(s, '「如果沒有天賦，\n那就一直重複。」', { x: 0.5, y: 1.45, w: 5.7, h: 1.9, fontSize: 34, bold: true, color: WHITE, valign: 'top' });
   T(s, '大頭 ・ 號碼 022 ・ Formosa Xtreme Triathlon VI', { x: 0.5, y: 3.45, w: 5.7, h: 0.4, fontSize: 14, bold: true, color: GOLD });
-  T(s, bullets(['從 2020 年 FXT 誕生開始，這條路走了六年', '2024 停辦一年；2025 起新賽道：日月潭 → 塔塔加 → 合歡主峰', '2026.11.13 第六屆。登山口到主峰最後 1.8 公里，一起走完']), { x: 0.5, y: 4.0, w: 5.7, h: 1.7, fontSize: 13.5, color: 'DCE3EA', paraSpaceAfter: 6 });
+  T(s, bullets(['從 2020 年 FXT 誕生開始，這條路走了六年、五次關門，最近的一次差 20 秒', '2024 停辦一年；2025 起新賽道：日月潭 → 塔塔加 → 合歡主峰', '2026.11.13 第六屆。登山口到主峰最後 1.8 公里，一起走完']), { x: 0.5, y: 4.0, w: 5.7, h: 1.7, fontSize: 13.5, color: 'DCE3EA', paraSpaceAfter: 6 });
   T(s, '這不是終點，是通往夢想的最後一哩路。', { x: 0.5, y: 5.9, w: 5.7, h: 0.5, fontSize: 15, italic: true, color: 'C9D3DE' });
   // online video (YouTube) — plays in PowerPoint with internet
   s.addMedia({ type: 'online', link: 'https://www.youtube.com/embed/yXOe-3TqXQ8', x: 6.6, y: 1.35, w: 6.23, h: 3.5 });
@@ -166,11 +166,11 @@ pres.addSection({ title: '開場' });
   const s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: section });
   s.addText('六屆的路：2020 → 2026', { placeholder: 'title' });
   const eds = [
-    ['2020', 'I', '11.27 花蓮', '第一次下水，秀姑巒溪 → 合歡主峰', NAVY],
-    ['2021', 'II', '11 月 花蓮', '再來一次', NAVY],
-    ['2022', 'III', '11.25 花蓮', '第三次站上起點', NAVY],
-    ['2023', 'IV', '11 月 花蓮', '太魯閣的霧與鐘聲', NAVY],
-    ['2025', 'V', '11.14 日月潭', '新賽道・242 km', TEAL],
+    ['2020', 'I', '11.27 花蓮', '跑步止於大禹嶺', NAVY],
+    ['2021', 'II', '11 月 花蓮', '新白楊，差 20 秒被關門', NAVY],
+    ['2022', 'III', '11.25 花蓮', '游泳超時被關門', NAVY],
+    ['2023', 'IV', '11 月 花蓮', '關原前，差 1 分半被關門', NAVY],
+    ['2025', 'V', '11.14 日月潭', '夫妻樹，差 2 分鐘被關門', TEAL],
     ['2026', 'VI', '11.13 日月潭', '最後一哩路', RED],
   ];
   const w = 1.95, gap = 0.12, x0 = 0.5;
@@ -193,7 +193,7 @@ pres.addSection({ title: '開場' });
   });
   card(s, 0.5, 6.0, 12.33, 0.9, { fill: CARD });
   iconCircle(s, 0.7, 6.2, 0.5, 'clock', MUTED);
-  T(s, (PHOTO_MAP.years ? '2024 停辦一年。六年、五場、同一個目標——這條路的每一年都有人在旁邊。' : '2024 停辦一年。六年、五場、同一個目標。照片請放進 Drive「FXT2026 簡報素材」資料夾，標上年份，我會一張張放進對應的格子。'), { x: 1.35, y: 6.0, w: 11.3, h: 0.9, fontSize: 12.5, color: INK, valign: 'middle' });
+  T(s, '五次站上起點，五次被關門：大禹嶺、新白楊 20 秒、游泳超時、關原 1 分半、夫妻樹 2 分鐘。2024 停辦一年。第六次，我們一起把最後一哩路走完。', { x: 1.35, y: 6.0, w: 11.3, h: 0.9, fontSize: 12.5, bold: true, color: INK, valign: 'middle' });
   s.addNotes('歷屆日期來源：2020 FXT Race Manual（11/27 花蓮）、2022 選手手冊（11/25）、2025 選手手冊（11/14）、2026 選手手冊（11/13）；2021、2023 僅知 11 月。照片格待選手提供照片後替換。');
 }
 
@@ -1014,8 +1014,9 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
   photo(s, 'hb-001-000.jpg', 0, 0, W, H);
   rect(s, 0, 0, W, H, '000000', { fill: { color: '000000', transparency: 40 }, line: { color: '000000', width: 0 } });
   T(s, '如果沒有天賦，那就一直重複。', { x: 0.8, y: 1.0, w: 11.7, h: 1.1, fontSize: 44, bold: true, color: WHITE });
-  T(s, '#See you at the top. ・ 合歡主峰 3,417 m ・ 登山口 23:00 前通過，一起走完最後 1.8 km', { x: 0.8, y: 2.1, w: 11.7, h: 0.45, fontSize: 16, color: GOLD, bold: true });
-  T(s, '大頭 022 ｜ 小麥（太太・陪跑員）・大顆頭・金剛・聖恩 ｜ 傑哥・佳惠・珮淳・攝影師 ｜ 小朱・阿徹 ｜ 俊儀', { x: 0.8, y: 2.6, w: 11.7, h: 0.5, fontSize: 14, color: 'E6ECF2' });
+  T(s, '大禹嶺 ・ 新白楊 20 秒 ・ 游泳超時 ・ 關原 1 分半 ・ 夫妻樹 2 分鐘 ・ 第六次', { x: 0.8, y: 2.05, w: 11.7, h: 0.4, fontSize: 16, color: GOLD, bold: true });
+  T(s, '#See you at the top. ・ 合歡主峰 3,417 m ・ 登山口 23:00 前通過，一起走完最後 1.8 km', { x: 0.8, y: 2.45, w: 11.7, h: 0.38, fontSize: 13, color: 'E6ECF2' });
+  T(s, '大頭 022 ｜ 小麥（太太・陪跑員）・大顆頭・金剛・聖恩 ｜ 傑哥・佳惠・珮淳・攝影師 ｜ 小朱・阿徹 ｜ 俊儀', { x: 0.8, y: 2.85, w: 11.7, h: 0.45, fontSize: 13, color: 'C9D3DE' });
   const three = [['vest', '只有背心能碰選手'], ['parking', '停白線內・車外・車頭'], ['clock', '關門前 15 分鐘預警']];
   three.forEach((t, i) => {
     const x = 0.8 + i * 4.0;
