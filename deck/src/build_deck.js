@@ -31,7 +31,7 @@ const HEX = THEME.colors;
 const pres = new pptxgen();
 pres.layout = 'LAYOUT_WIDE'; // 13.333 x 7.5
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
-pres.title = '2026 FXT 補給作戰計畫';
+pres.title = '2026 FXT 第六次，一起走完';
 pres.author = 'FXT 補給團隊';
 const C = pres.SchemeColor;
 const W = 13.333, H = 7.5;
@@ -41,7 +41,7 @@ const MUTED = '7A8794', BORDER = 'E3E7EC', NAVY = '0B1F3A', INK = '0B0F14', RED 
 pres.defineSlideMaster({
   title: 'CONTENT', background: { color: WHITE },
   objects: [
-    { text: { text: '2026 FXT 補給作戰計畫 ｜ 團隊內部使用 ｜ 以賽前說明會公布內容為最終依據', options: { x: 0.5, y: 7.08, w: 9, h: 0.3, fontSize: 9, color: MUTED, margin: 0 } } },
+    { text: { text: '2026 FXT 第六次，一起走完 ｜ 補給團隊計畫・內部使用 ｜ 以賽前說明會公布內容為最終依據', options: { x: 0.5, y: 7.08, w: 9, h: 0.3, fontSize: 9, color: MUTED, margin: 0 } } },
     { placeholder: { options: { name: 'title', type: 'title', x: 0.5, y: 0.32, w: 12.3, h: 0.75, fontSize: 28, bold: true, color: INK, margin: 0, valign: 'middle', align: 'left' }, text: '' } },
   ],
   slideNumber: { x: 12.3, y: 7.05, w: 0.6, h: 0.3, fontSize: 9, color: MUTED, align: 'right' },
@@ -131,8 +131,8 @@ pres.addSection({ title: '開場' });
   rect(s, 0, 0, W, 5.6, '000000', { fill: { color: '000000', transparency: PHOTO_MAP.cover ? 45 : 35 }, line: { color: '000000', width: 0 } });
   s.addImage({ path: photoPath('logo_fxt_xtri.jpg'), x: 0.6, y: 0.45, w: 3.0, h: 0.64 });
   T(s, 'FORMOSA XTREME TRIATHLON VI ・ 2026.11.13（五）', { x: 0.6, y: 2.55, w: 12, h: 0.45, fontSize: 16, bold: true, color: GOLD, charSpacing: 2 });
-  T(s, '2026 FXT 補給作戰計畫', { x: 0.6, y: 3.0, w: 12, h: 1.1, fontSize: 52, bold: true, color: WHITE });
-  T(s, '日月潭 伊達邵碼頭 → 塔塔加夫妻樹 → 合歡主峰 3,417 m ｜ 補給團隊任務說明與執行依據', { x: 0.6, y: 4.15, w: 12, h: 0.5, fontSize: 18, color: 'E6ECF2' });
+  T(s, '第六次，一起走完', { x: 0.6, y: 3.0, w: 12, h: 1.1, fontSize: 54, bold: true, color: WHITE });
+  T(s, '2026 FXT 補給團隊計畫 ｜ 日月潭 伊達邵碼頭 → 塔塔加夫妻樹 → 合歡主峰 3,417 m', { x: 0.6, y: 4.15, w: 12, h: 0.5, fontSize: 18, color: 'E6ECF2' });
   rect(s, 0, 5.6, W, 1.9, INK);
   const sx = 0.6, sw = 2.43;
   stat(s, sx + sw * 0, 5.95, sw, '3.8 km', '游泳・日月潭', BLUE);

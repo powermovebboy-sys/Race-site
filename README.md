@@ -1,8 +1,8 @@
-# 2026 FXT 補給作戰計畫（Formosa Xtreme Triathlon VI・2026.11.13）
+# 2026 FXT 第六次，一起走完（Formosa Xtreme Triathlon VI・2026.11.13）
 
 補給團隊的任務說明簡報與執行依據。內容以 **2026 FXT 選手手冊（2026/10/29 版）** 為準，並整合原「FXT 賽事補給計畫」簡報的補給品項、車隊分工與行程安排。
 
-- 簡報檔：[`deck/2026_FXT_補給作戰計畫.pptx`](deck/2026_FXT_補給作戰計畫.pptx)（29 頁，16:9）
+- 簡報檔：[`deck/2026_FXT_第六次一起走完.pptx`](deck/2026_FXT_第六次一起走完.pptx)（29 頁，16:9）
 - 研究整理：[`research/FXT_2026_研究整理.md`](research/FXT_2026_研究整理.md)（手冊事實、與原簡報比對、待確認）；附錄：[`research/FXT_2026_網路研究附錄.md`](research/FXT_2026_網路研究附錄.md)（網路公開資料、歷屆、地理、安全、來源 URL）
 - 產生器原始碼：[`deck/src/`](deck/src/)（pptxgenjs，可重新產生整份簡報）
 
@@ -32,7 +32,7 @@
 ```bash
 cd deck/src
 npm install
-npm run all      # 產生圖示與背景 → 產生剖面／地圖 → 產生 ../2026_FXT_補給作戰計畫.pptx
+npm run all      # 產生圖示與背景 → 產生剖面／地圖 → 產生 ../2026_FXT_第六次一起走完.pptx
 ```
 
 - `gen_assets.js`：山景背景（SVG）與 react-icons 圖示 PNG。

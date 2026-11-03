@@ -5,7 +5,7 @@
   "scripts": {
     "assets": "node gen_assets.js",
     "charts": "node gen_charts.js",
-    "build": "NODE_PATH=./node_modules node build_deck.js ../2026_FXT_補給作戰計畫.pptx",
+    "build": "NODE_PATH=./node_modules node build_deck.js ../2026_FXT_第六次一起走完.pptx",
     "all": "npm run assets && npm run charts && npm run build"
   },
   "dependencies": {
