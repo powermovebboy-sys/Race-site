@@ -1,10 +1,10 @@
-// 2026 FXT 補給作戰計畫 — deck builder (pptxgenjs structured deck)
+// 2026 FXT 第六次，一起走完 — deck builder (pptxgenjs structured deck)
 const path = require('path');
 const fs = require('fs');
 const pptxgen = require('pptxgenjs');
 const { applyTheme } = require(path.join(__dirname, 'vendor', 'apply_theme.js'));
 
-const OUT = process.argv[2] || path.join(__dirname, 'FXT_2026_補給作戰計畫.pptx');
+const OUT = process.argv[2] || path.join(__dirname, '2026_FXT_第六次一起走完.pptx');
 const ASSETS = path.join(__dirname, 'assets');
 const PHOTOS = path.join(__dirname, 'photos');
 const icon = (name, color = 'white') => path.join(ASSETS, `icon_${name}_${color}.png`);

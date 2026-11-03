@@ -1,7 +1,7 @@
 {
   "name": "fxt-2026-crew-deck",
   "private": true,
-  "description": "2026 FXT 補給作戰計畫簡報產生器（pptxgenjs）",
+  "description": "2026 FXT 第六次，一起走完 — 簡報產生器（pptxgenjs）",
   "scripts": {
     "assets": "node gen_assets.js",
     "charts": "node gen_charts.js",
