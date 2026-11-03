@@ -14,5 +14,58 @@
   "珮淳": "c11.jpg",
   "聖恩": "c12.jpg",
   "攝影師": "c13.png"
+ },
+ "years": {
+  "2020": "y2020.jpg",
+  "2021": "y2021.jpg",
+  "2022": "y2022.jpg",
+  "2023": "y2023.jpg",
+  "2025": "y2025.jpg",
+  "2026": "y2026.jpg"
+ },
+ "hero": {
+  "file": "hero_ride.jpg",
+  "line": "如果沒有天賦，那就一直重複。",
+  "caption": "2025 FXT V・日月潭 → 塔塔加 → 合歡主峰"
+ },
+ "wall": [
+  {
+   "file": "w1.jpg",
+   "label": "2020・教練的布條"
+  },
+  {
+   "file": "w2.jpg",
+   "label": "2022・拜託 Jovi 讓大頭出 T1"
+  },
+  {
+   "file": "w3.jpg",
+   "label": "2023・16:36:31"
+  },
+  {
+   "file": "w4.jpg",
+   "label": "2023・太魯閣"
+  },
+  {
+   "file": "w5.jpg",
+   "label": "2025・隊友"
+  },
+  {
+   "file": "w6.jpg",
+   "label": "泳池團練"
+  },
+  {
+   "file": "w7.jpg",
+   "label": "2025・陪跑員"
+  },
+  {
+   "file": "w8.jpg",
+   "label": "工作室團練"
+  }
+ ],
+ "wallTitle": "六年，一直重複",
+ "supply": {
+  "car": "d_car.jpg",
+  "chair": "d_chair.jpg",
+  "grapes": "d_grapes.jpg"
  }
 }

@@ -166,10 +166,10 @@ pres.addSection({ title: '開場' });
   const s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: section });
   s.addText('六屆的路：2020 → 2026', { placeholder: 'title' });
   const eds = [
-    ['2020', 'I', '11.27 花蓮', '秀姑巒溪 → 合歡主峰', NAVY],
-    ['2021', 'II', '11 月 花蓮', '同路線', NAVY],
-    ['2022', 'III', '11.25 花蓮', '同路線', NAVY],
-    ['2023', 'IV', '11 月 花蓮', '同路線', NAVY],
+    ['2020', 'I', '11.27 花蓮', '第一次下水，秀姑巒溪 → 合歡主峰', NAVY],
+    ['2021', 'II', '11 月 花蓮', '再來一次', NAVY],
+    ['2022', 'III', '11.25 花蓮', '第三次站上起點', NAVY],
+    ['2023', 'IV', '11 月 花蓮', '太魯閣的霧與鐘聲', NAVY],
     ['2025', 'V', '11.14 日月潭', '新賽道・242 km', TEAL],
     ['2026', 'VI', '11.13 日月潭', '最後一哩路', RED],
   ];
@@ -442,7 +442,7 @@ divider('PART 1', '認識賽事與規則', '路線、關門時間、官方規定
     T(s, r[2], { x: x + 0.66, y: y + 0.1, w: w - 0.8, h: 0.3, fontSize: 12, bold: true, color: r[1] });
     T(s, r[3], { x: x + 0.66, y: y + 0.4, w: w - 0.8, h: 0.56, fontSize: 10, color: HEX.dk2 });
   });
-  photo(s, 'hb-012-034.jpg', x, 5.7, w, 1.2);
+  if (PHOTO_MAP.supply && crewPhoto(PHOTO_MAP.supply.car)) s.addImage({ path: crewPhoto(PHOTO_MAP.supply.car), x, y: 5.7, w, h: 1.2, sizing: { type: 'cover', w, h: 1.2 } }); else photo(s, 'hb-012-034.jpg', x, 5.7, w, 1.2);
   s.addNotes('來源：2026 FXT 選手手冊「特殊需求袋」「塔塔加折返點關門與補給車規定」；袋內品項來自原簡報「6. 夫妻樹特殊需求袋」。');
 }
 
@@ -661,16 +661,20 @@ divider('PART 3', '賽段執行手冊', '游泳、自行車、跑步——每一
   // right: visual of bottle color code
   const x = 8.7, w = 4.13;
   card(s, x, 1.25, w, 5.6, { fill: NAVY });
+  if (PHOTO_MAP.supply && crewPhoto(PHOTO_MAP.supply.chair)) { s.addImage({ path: crewPhoto(PHOTO_MAP.supply.chair), x: x + 0.2, y: 5.0, w: w - 0.4, h: 1.7, sizing: { type: 'cover', w: w - 0.4, h: 1.7 } }); }
   T(s, '水壺顏色一眼辨認', { x: x + 0.2, y: 1.4, w: w - 0.4, h: 0.4, fontSize: 15, bold: true, color: WHITE });
   const bottles = [['FFFFFF', '白', '蜂蜜水＋Race On／水（黑袋）'], ['F5B700', '黃', '梅子可樂＋Race On（草坪頭）'], ['1F2937', '黑', '冰水／蜂蜜水＋Race On（豐丘）'], ['D7262F', '紅', '紅茶＋冰塊（埔里高工）']];
+  const hasChair = !!(PHOTO_MAP.supply && crewPhoto(PHOTO_MAP.supply.chair));
   bottles.forEach((b, i) => {
-    const y = 1.95 + i * 0.78;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.3, y: y + 0.05, w: 0.38, h: 0.6, rectRadius: 0.1, fill: { color: b[0] }, line: { color: 'C9D3DE', width: 1 } });
-    T(s, b[1], { x: x + 0.85, y: y + 0.02, w: 0.5, h: 0.35, fontSize: 15, bold: true, color: WHITE });
-    T(s, b[2], { x: x + 0.85, y: y + 0.36, w: w - 1.1, h: 0.35, fontSize: 10.5, color: 'C9D3DE' });
+    const y = 1.9 + i * (hasChair ? 0.62 : 0.78);
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.3, y: y + 0.05, w: 0.34, h: hasChair ? 0.48 : 0.6, rectRadius: 0.1, fill: { color: b[0] }, line: { color: 'C9D3DE', width: 1 } });
+    T(s, b[1], { x: x + 0.8, y: y + 0.0, w: 0.5, h: 0.3, fontSize: 14, bold: true, color: WHITE });
+    T(s, b[2], { x: x + 0.8, y: y + 0.28, w: w - 1.05, h: 0.3, fontSize: 10, color: 'C9D3DE' });
   });
+  if (!(PHOTO_MAP.supply && crewPhoto(PHOTO_MAP.supply.chair))) {
   T(s, '補給手口訣', { x: x + 0.2, y: 5.15, w: w - 0.4, h: 0.3, fontSize: 12, bold: true, color: GOLD });
   T(s, '到站前 5 分鐘備好 → 車頭站定 → 遞、收、記 → 收垃圾 → 回報下一車', { x: x + 0.2, y: 5.45, w: w - 0.4, h: 1.2, fontSize: 11.5, color: 'E6ECF2' });
+  } else { T(s, '口訣：到站前 5 分鐘備好 → 車頭站定 → 遞、收、記 → 收垃圾 → 回報下一車', { x: x + 0.2, y: 4.42, w: w - 0.4, h: 0.55, fontSize: 10, color: GOLD, bold: true }); }
   s.addNotes('資料來源：原簡報「1–3. 起床與 T1 補給」「4–5. 信義門市與草坪頭」。草坪頭備註依 2026 手冊規定新增。');
 }
 
@@ -789,7 +793,7 @@ divider('PART 3', '賽段執行手冊', '游泳、自行車、跑步——每一
     T(s, p[2], { x: 1.25, y: y + 0.08, w: 6.7, h: 0.3, fontSize: 12.5, bold: true, color: p[1] });
     T(s, p[3], { x: 1.25, y: y + 0.4, w: 6.7, h: 0.5, fontSize: 10.5, color: HEX.dk2 });
   });
-  photo(s, 'hb-014-040.jpg', 8.4, 1.25, 4.43, 1.35);
+  if (PHOTO_MAP.supply && crewPhoto(PHOTO_MAP.supply.grapes)) s.addImage({ path: crewPhoto(PHOTO_MAP.supply.grapes), x: 8.4, y: 1.25, w: 4.43, h: 1.35, sizing: { type: 'cover', w: 4.43, h: 1.35 } }); else photo(s, 'hb-014-040.jpg', 8.4, 1.25, 4.43, 1.35);
   card(s, 8.4, 2.72, 4.43, 2.3, { fill: WHITE, line: ORANGE, lineW: 1.5 });
   T(s, '跑步段換裝與補給（選手指示）', { x: 8.6, y: 2.8, w: 4.1, h: 0.32, fontSize: 12.5, bold: true, color: ORANGE });
   const chg = [['shirt', ORANGE, '清境高空 17.5 km', '脫鐵服上半身 → 套 T 恤'], ['tent', TEAL, '翠峰 26 km', '套換衣斗篷，鐵服下半身 → 跑褲'], ['cold', BLUE, '鳶峰 33 km', '迪卡儂長褲＋外套＋手套，開始走路']];
