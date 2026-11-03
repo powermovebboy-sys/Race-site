@@ -1017,6 +1017,32 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
   T(s, '前三項為原簡報已列之待確認事項（第 1 項已定）；其餘為對照 2026 選手手冊與公開資料後新增。', { x: 0.5, y: 6.82, w: 12.3, h: 0.26, fontSize: 9.5, color: MUTED });
 }
 
+// 28b. 最後一哩路：給大頭的一句話
+{
+  const s = pres.addSlide({ masterName: 'NIGHT', sectionTitle: section });
+  s.addText('最後一哩路：我們想對大頭說的話', { placeholder: 'title' });
+  const msgs = PHOTO_MAP.messages || {};
+  const team = [['小麥', '太太・陪跑員'], ['大顆頭', 'RAV4 車長'], ['金剛', '補給手'], ['聖恩', 'RAV4'], ['傑哥', 'GLC 車長'], ['佳惠', 'GLC'], ['珮淳', 'GLC'], ['攝影師', '影像紀錄'], ['小朱', 'CRV 車長'], ['阿徹', 'CRV・HELIX'], ['俊儀', 'MODEL X'], ['教練', '謝漢霖']];
+  const cols = 4, tw = 2.97, gapx = 0.15, th = 1.72, gapy = 0.14;
+  team.forEach((m, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const x = 0.5 + col * (tw + gapx), y = 1.3 + row * (th + gapy);
+    card(s, x, y, tw, th, { fill: '14263F', line: '2A4160', lineW: 1 });
+    const pf = crewPhoto((PHOTO_MAP.crew || {})[m[0]]);
+    const d = 0.62;
+    if (pf) s.addImage({ path: pf, x: x + 0.16, y: y + 0.16, w: d, h: d, sizing: { type: 'cover', w: d, h: d }, rounding: true });
+    else { s.addShape(pres.shapes.OVAL, { x: x + 0.16, y: y + 0.16, w: d, h: d, fill: { color: GOLD }, line: { color: GOLD, width: 0 } }); T(s, m[0].slice(0, 1), { x: x + 0.16, y: y + 0.16, w: d, h: d, fontSize: 18, bold: true, color: NAVY, align: 'center', valign: 'middle' }); }
+    T(s, m[0], { x: x + 0.9, y: y + 0.14, w: tw - 1.05, h: 0.36, fontSize: 14, bold: true, color: WHITE, valign: 'middle' });
+    T(s, m[1], { x: x + 0.9, y: y + 0.48, w: tw - 1.05, h: 0.28, fontSize: 9.5, color: 'A9B4C2' });
+    const txt = msgs[m[0]];
+    if (txt) T(s, '「' + txt + '」', { x: x + 0.16, y: y + 0.86, w: tw - 0.32, h: 0.8, fontSize: 11.5, color: 'E6ECF2', valign: 'top' });
+    else T(s, '「　　　　　　　　　　　　」', { x: x + 0.16, y: y + 0.9, w: tw - 0.32, h: 0.6, fontSize: 12, color: '5B6B7F', valign: 'top' });
+  });
+  const filled = Object.keys(msgs).length;
+  T(s, filled ? '登山口到主峰 1.8 公里，小麥陪在身邊；這一頁，其他人也都在。' : '每人一句話，會議前交給小麥；登山口到主峰的 1.8 公里，這一頁大家都在。', { x: 0.5, y: 6.95, w: 12.3, h: 0.3, fontSize: 10.5, color: 'C9D3DE' });
+  s.addNotes('每位隊友給大頭的一句話，放在 photo_map.json 的 messages 欄位（姓名 → 句子）即可填入。教練那格可依需求移除。');
+}
+
 // 29. 結尾
 {
   const s = pres.addSlide({ masterName: 'BLANK', sectionTitle: section });
