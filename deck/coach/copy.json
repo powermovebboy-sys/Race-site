@@ -1,0 +1,19 @@
+{"deck_title":"002 比賽日：簡單、吃飽、不停車","deck_subtitle":"2026 FXT VI・11/13・日月潭 → 合歡主峰","slides":[
+{"id":"cover","kind":"cover","title":"比賽日：簡單、吃飽、不停車","bullets":["游泳 3.8 km","自行車 196.7 km","跑步 42 km"],"crew":[],"reminder":"","photo":"coach.jpg","mood":"沒有計畫，就是計畫。"},
+{"id":"overview","kind":"overview","title":"一天，一張圖","bullets":["06:00 下水，07:10 上岸","騎車不停車，定點補給","13:30 開始跑，目標 6 小時"],"crew":["補給手穿背心在車頭遞","車停白線內、人在車外"],"reminder":"","photo":"","mood":"吃飽，上山。"},
+{"id":"s1","kind":"step","time":"04:00","place":"飯店房間","title":"吃完所有早餐，然後上廁所","bullets":["香蕉、飯糰、口糧、泡麵、貝納頌","最後吃芭樂"],"crew":[],"reminder":"","photo":"breakfast","mood":""},
+{"id":"s2","kind":"step","time":"06:00","place":"伊達邵碼頭 T1","title":"身上塗滿凡士林，等開賽","bullets":["泳鏡、泳帽、晶片","SYB 車褲、防寒衣、浮力褲"],"crew":["只有穿背心＋手環的陪跑員能進 T1"],"reminder":"防寒衣是強制裝備；手套不可以。","photo":"swim_gear.jpg","mood":""},
+{"id":"s3","kind":"step","time":"07:10","place":"上岸 T1","title":"打底衣、黃色車衣、安全帽、黃色眼鏡","bullets":["吃一個握便當跟一罐貝納頌","車衣口袋放兩包巧克力吐司","不會再用的東西丟藍色防水包"],"crew":["陪跑員確認車燈、胎壓"],"reminder":"","photo":"bike_kit.jpg","mood":""},
+{"id":"s4","kind":"step","time":"08:10","place":"7-11 信義門市・33 km","title":"車速放慢，不停車","bullets":["台21線 88K","定點補給威德一包"],"crew":["車停白線內，補給手在車頭遞"],"reminder":"","photo":"xinyi_711.jpg","mood":""},
+{"id":"s5","kind":"step","time":"08:40","place":"7-11 和社門市・47 km","title":"車速放慢，不停車","bullets":["台21線 102K","定點補給威德一包"],"crew":[],"reminder":"","photo":"heshe_711.jpg","mood":""},
+{"id":"s6","kind":"step","time":"08:50","place":"草坪頭管制區・56 km","title":"冰紅茶、烏梅汁，不停","bullets":["定點補給冰紅茶、烏梅汁"],"crew":["補給要在管制哨「之前」完成"],"reminder":"管制哨不能停車、不能補給；補給車到此為止。","photo":"caopingtou.jpg","mood":""},
+{"id":"s7","kind":"step","time":"10:20","place":"夫妻樹・86 km 折返","title":"停車換裝：穿外套下山","bullets":["台21線 141K","特殊補給袋吃一包威德 IN"],"crew":["黑袋早上出發前交給大會"],"reminder":"","photo":"jacket.jpg","mood":"上去的人，都要下來。"},
+{"id":"s8","kind":"step","time":"10:50","place":"草坪頭管制區・116 km","title":"停車換裝：脫衣服","bullets":["換藍色太陽眼鏡","水壺換兩罐冰紅茶","一個藍莓夾心土司"],"crew":[],"reminder":"","photo":"glasses.jpg","mood":""},
+{"id":"s9","kind":"step","time":"12:10","place":"豐丘葡萄冰沙・142 km","title":"車速放慢，不停","bullets":["一罐冰紅茶","一罐冰沙"],"crew":[],"reminder":"","photo":"fengqiu.jpg","mood":""},
+{"id":"s10","kind":"step","time":"12:30","place":"水里坡・149 km","title":"邊騎邊吃午餐！","bullets":["沿路定點補給，目標吃飽！！","冰紅茶","草莓夾心、藍莓夾心"],"crew":[],"reminder":"","photo":"","mood":""},
+{"id":"s11","kind":"step","time":"13:00","place":"日月潭 → 埔里高工","title":"需前導車帶路","bullets":["日月潭到埔里高工"],"crew":[],"reminder":"","photo":"","mood":""},
+{"id":"s12","kind":"step","time":"13:20","place":"T2 全家賽德克店・196.7 km","title":"換跑步裝備","bullets":["紅色跑鞋、帽子、路跑背心","水袋背包、頭燈、手機"],"crew":[],"reminder":"檢錄至少 2 分鐘。","photo":"t2_kit.jpg","mood":""},
+{"id":"s13","kind":"step","time":"13:30","place":"42 公里路跑","title":"目標六小時，沒有計畫，看體感","bullets":["理想狀態就邊跑邊吃","備用跑鞋三雙","凡士林、發熱膏、外套一件一件加"],"crew":[],"reminder":"","photo":"shoes.jpg","mood":"一直重複。"},
+{"id":"table","kind":"table","title":"關門 vs 我的時間","bullets":["我的時間都比關門早很多","所以不用急，吃飽最重要"],"crew":[],"reminder":"","photo":"","mood":"","table":[["檢查點","關門","我的時間","餘裕"],["游泳上岸","07:40","07:10","30 分"],["夫妻樹 86 km","12:00","10:20","1 小時 40 分"],["T2","15:50","13:20","2 小時 30 分"],["登山口 40 km","23:00","約 19:30","3 小時 30 分"]]},
+{"id":"closing","kind":"closing","title":"吃飽，上山。","bullets":["簡單","不停車","看體感"],"crew":[],"reminder":"","photo":"","mood":"沒有計畫，就是計畫。"}
+]}
