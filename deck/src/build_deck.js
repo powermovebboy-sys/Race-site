@@ -1057,7 +1057,7 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
     T(s, m[1], { x: x + 0.9, y: y + 0.48, w: tw - 1.05, h: 0.28, fontSize: 9.5, color: 'A9B4C2' });
     const txt = PHOTO_MAP.revealMessages ? msgs[m[0]] : null;
     if (txt) T(s, '「' + txt + '」', { x: x + 0.16, y: y + 0.86, w: tw - 0.32, h: 0.8, fontSize: 11.5, color: 'E6ECF2', valign: 'top' });
-    else { s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.16, y: y + 0.95, w: tw - 0.32, h: 0.55, rectRadius: 0.08, fill: { color: '0F1D33' }, line: { color: '2A4160', width: 1, dashType: 'dash' } }); T(s, '比賽當天，山頂上說', { x: x + 0.16, y: y + 0.95, w: tw - 0.32, h: 0.55, fontSize: 10.5, color: '7A8794', align: 'center', valign: 'middle' }); }
+    else { s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.16, y: y + 0.86, w: tw - 0.32, h: 0.74, rectRadius: 0.08, fill: { color: WHITE }, line: { color: 'C9D3DE', width: 1 } }); T(s, '給大頭的一句話（手寫）・山頂上說', { x: x + 0.24, y: y + 0.87, w: tw - 0.5, h: 0.2, fontSize: 7.5, color: 'A9B4C2' }); }
   });
   const filled = Object.keys(msgs).length;
   T(s, '每個人都有一句話想對大頭說。今天先不說，11/13 登山口到主峰的 1.8 公里，一句一句說給他聽。', { x: 0.5, y: 6.95, w: 12.3, h: 0.3, fontSize: 10.5, color: 'C9D3DE' });
@@ -1081,11 +1081,10 @@ divider('PART 4', '後勤、安全與待確認', '夜間高山、交通住宿、
     iconCircle(s, x + 0.2, 3.65, 0.6, t[0], GOLD, 'navy');
     T(s, t[1], { x: x + 0.95, y: 3.4, w: 2.75, h: 1.1, fontSize: 16, bold: true, color: WHITE, valign: 'middle' });
   });
-  card(s, 0.8, 4.85, 11.73, 2.1, { fill: '000000' });
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.85, w: 11.73, h: 2.1, rectRadius: 0.12, fill: { color: '000000', transparency: 35 }, line: { color: '3C4858', width: 1 } });
-  T(s, '緊急聯絡（會議中填寫）', { x: 1.0, y: 4.95, w: 6, h: 0.35, fontSize: 13, bold: true, color: GOLD });
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 4.85, w: 11.73, h: 2.1, rectRadius: 0.12, fill: { color: WHITE }, line: { color: 'C9D3DE', width: 1 } });
+  T(s, '緊急聯絡（會議中手寫填入）', { x: 1.0, y: 4.95, w: 6, h: 0.35, fontSize: 13, bold: true, color: RED });
   const contacts = ['大會賽事辦公室：＿＿＿＿＿＿＿', '大會醫護／救護：＿＿＿＿＿＿＿', 'RAV4 大顆頭：＿＿＿＿＿＿＿', 'GLC 傑哥：＿＿＿＿＿＿＿', 'CRV 小朱：＿＿＿＿＿＿＿', 'MODEL X 俊儀：＿＿＿＿＿＿＿', '小麥／金剛：＿＿＿＿＿＿＿', '緊急救援：119'];
-  contacts.forEach((c, i) => T(s, c, { x: 1.0 + (i % 4) * 2.9, y: 5.4 + Math.floor(i / 4) * 0.6, w: 2.8, h: 0.5, fontSize: 11.5, color: 'E6ECF2', valign: 'middle' }));
+  contacts.forEach((c, i) => T(s, c, { x: 1.0 + (i % 4) * 2.9, y: 5.4 + Math.floor(i / 4) * 0.6, w: 2.8, h: 0.5, fontSize: 11.5, color: INK, valign: 'middle' }));
   T(s, '資料來源：2026 FXT 選手手冊（Google Drive 2026/10/29 更新版）、原「FXT 賽事補給計畫」簡報、2025 FXT 選手手冊影像、2025 大會 GPX、2025 車隊清單。', { x: 0.8, y: 7.05, w: 11.7, h: 0.3, fontSize: 9, color: 'DCE3EA' });
 }
 
