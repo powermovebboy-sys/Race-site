@@ -16,7 +16,7 @@ const rows = fs.readFileSync(DATA, 'utf8').trim().split('\n').slice(1).map(l => 
 const bike = rows.map(r => ({ km: r[0], ele: r[1], lat: r[2], lon: r[3] }));
 const BIKE_END = bike[bike.length - 1].km; // ~198 km in GPX (official 196.7)
 const runPts = [
-  [0, 714], [4, 900], [9, 1148], [13, 1450], [17.5, 1750], [20, 1800], [23, 2100], [26, 2309],
+  [0, 714], [4, 900], [9, 1148], [13, 1450], [19, 1750], [21, 1850], [23, 2100], [26, 2309],
   [29.5, 2520], [33, 2756], [36, 2950], [38, 3085], [40, 3275], [42, 3417],
 ];
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
@@ -104,7 +104,7 @@ function profileSvg() {
   ].map(mk => ({ ...mk, X: xb(mk.km), Y: y(eleAt(mk.km)), color: mk.cutoff ? C.red : C.bike, anchor: mk.anchor || 'middle' }));
   const runMarks = [
     { km: 0, label: 'T2', sub: '714 m', anchor: 'start', level: 0 },
-    { km: 17.5, label: '清境高空步道', sub: '17.5 km・18:50', cutoff: true, level: 0 },
+    { km: 19, label: '清境高空步道', sub: '19 km・18:50', cutoff: true, level: 0 },
     { km: 26, label: '翠峰', sub: '26 km・20:20・陪跑', cutoff: true, level: 3 },
     { km: 33, label: '鳶峰', sub: '33 km・21:40・強制', cutoff: true, level: 2 },
     { km: 40, label: '登山口', sub: '40 km・23:00', cutoff: true, anchor: 'end', level: 1 },
@@ -159,7 +159,7 @@ function mapSvg() {
   const l4 = near(149); label(l4.lat, l4.lon, '水里坡', '約 149 km', C.bike, -24, -4, 'end');
   const l5 = near(185); label(l5.lat, l5.lon, '埔里高工', '約 185 km', C.bike, -24, 44, 'end');
   label(24.0039, 121.0869, 'T2', '196.7 km・15:50 關門・檢錄', C.red, 26, 56, 'start', true);
-  label(24.0560, 121.1610, '清境高空步道', '17.5 km・18:50', C.run, 30, 16, 'start');
+  label(24.0560, 121.1610, '清境高空步道', '19 km・18:50', C.run, 30, 16, 'start');
   label(24.1030, 121.1980, '翠峰', '26 km・20:20・開放陪跑', C.run, -30, -26, 'end');
   label(24.1190, 121.2330, '鳶峰', '33 km・21:40・強制陪跑', C.run, 30, 54, 'start');
   label(24.1330, 121.2680, '昆陽・主峰登山口', '40 km・23:00', C.run, 30, -30, 'start');
@@ -194,7 +194,7 @@ function runOnlySvg() {
   const marks = [
     { km: 0, label: 'T2 全家仁愛賽德克店', sub: '約 714 m・15:50 關門', anchor: 'start', color: C.red, cutoff: true, level: 1 },
     { km: 9, label: '霧社', sub: '約 1,148 m', anchor: 'middle', color: C.run, level: 0 },
-    { km: 17.5, label: '清境高空步道', sub: '18:50 關門・換 T 恤・葡萄', anchor: 'middle', color: C.red, cutoff: true, level: 2 },
+    { km: 19, label: '清境高空步道', sub: '18:50 關門・換 T 恤・葡萄', anchor: 'middle', color: C.red, cutoff: true, level: 2 },
     { km: 23, label: '梅峰', sub: '約 2,100 m', anchor: 'middle', color: C.run, level: 0 },
     { km: 26, label: '翠峰', sub: '20:20 關門・開放陪跑・換跑褲', anchor: 'middle', color: C.red, cutoff: true, level: 3 },
     { km: 33, label: '鳶峰', sub: '21:40 關門・強制陪跑・長褲外套', anchor: 'middle', color: C.red, cutoff: true, level: 1 },
