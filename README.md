@@ -4,6 +4,7 @@
 
 - 簡報檔：[`deck/2026_FXT_第六次一起走完.pptx`](deck/2026_FXT_第六次一起走完.pptx)（36 頁，16:9）
 - 研究整理：[`research/FXT_2026_研究整理.md`](research/FXT_2026_研究整理.md)（手冊事實、與原簡報比對、待確認）；附錄：[`research/FXT_2026_網路研究附錄.md`](research/FXT_2026_網路研究附錄.md)（網路公開資料、歷屆、地理、安全、來源 URL）
+- 手寫列印版：[`deck/2026_FXT_手寫列印版.pdf`](deck/2026_FXT_手寫列印版.pdf)（A4 橫式白底 2 頁：給大頭的一句話、緊急聯絡與關門速查；`node deck/src/build_print.js` 重新產生）
 - 產生器原始碼：[`deck/src/`](deck/src/)（pptxgenjs，可重新產生整份簡報）
 
 ## 簡報結構
