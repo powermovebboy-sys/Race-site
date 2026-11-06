@@ -92,7 +92,7 @@ function profileSvg() {
   const bikeMarks = [
     { km: 0, label: '伊達邵 T1', sub: '06:00 出發', anchor: 'start' },
     { km: 33.5, label: '信義 7-11', sub: '約 33 km' },
-    { km: 56, label: '草坪頭管制哨', sub: '56 km・紅袋' , cutoff: true },
+    { km: 56, label: '草坪頭管制哨', sub: '56 km・愛玉橋補給・紅袋備用' , cutoff: true },
     { km: 76, label: '觀山', sub: '約 76 km', anchor: 'end' },
     { km: 86.2, label: '塔塔加夫妻樹', sub: '86 km・黑袋・12:00 關門', cutoff: true },
     { km: 125, label: '和社 7-11', sub: '約 125 km' },
@@ -154,7 +154,7 @@ function mapSvg() {
   label(23.8489, 120.9302, '日月潭 伊達邵碼頭', 'START 06:00・游泳 3.8 km', C.navy, 26, -24, 'start', true);
   label(23.5123, 120.8910, '塔塔加夫妻樹', '86 km 折返・12:00 關門・黑袋', C.red, 30, 46, 'start', true);
   const l1 = near(33.5); label(l1.lat, l1.lon, '信義 7-11', '約 33 km／回程約 139 km', C.bike, -24, 8, 'end');
-  const l2 = near(56); label(l2.lat, l2.lon, '草坪頭管制哨', '56 km・紅袋・禁行區起點', C.red, -30, -10, 'end');
+  const l2 = near(56); label(l2.lat, l2.lon, '草坪頭管制哨', '56 km・愛玉橋補給・禁行區起點', C.red, -30, -10, 'end');
   const l3 = near(142); label(l3.lat, l3.lon, '豐丘', '約 142 km', C.bike, 26, 40, 'start');
   const l4 = near(149); label(l4.lat, l4.lon, '水里坡', '約 149 km', C.bike, -24, -4, 'end');
   const l5 = near(185); label(l5.lat, l5.lon, '埔里高工', '約 185 km', C.bike, -24, 44, 'end');
