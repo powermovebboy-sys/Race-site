@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
-const SRC = process.argv[2] || path.join(__dirname, '..', 'checklist', 'checklist.json');
+const SRC = process.argv[2] || path.join(__dirname, '..', 'checklist', 'checklist_athlete.json');
 const OUT = process.argv[3] || path.join(__dirname, '..', '2026_FXT_行李核對清單.pdf');
 const D = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -13,26 +13,26 @@ const html = `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><s
 @page { size: A4; margin: 12mm 11mm 13mm 11mm; }
 * { box-sizing: border-box; }
 html { font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans CJK TC", "WenQuanYi Zen Hei", sans-serif; color: #0B0F14; }
-body { margin: 0; font-size: 9.6pt; line-height: 1.32; }
+body { margin: 0; font-size: ${D.fontPt || 9.6}pt; line-height: 1.32; }
 header { border-bottom: 2.5pt solid #D7262F; padding-bottom: 5pt; margin-bottom: 8pt; display: flex; align-items: flex-end; justify-content: space-between; gap: 10pt; }
 h1 { font-size: 19pt; margin: 0; letter-spacing: .5pt; }
 .sub { font-size: 9pt; color: #5B6673; margin-top: 2pt; }
 .legend { font-size: 8pt; color: #5B6673; text-align: right; white-space: nowrap; }
 .cols { column-count: 2; column-gap: 9mm; }
 .sec { break-inside: avoid; margin: 0 0 8pt 0; border: .75pt solid #C9D3DE; border-radius: 5pt; overflow: hidden; }
-.sec h2 { margin: 0; font-size: 10.2pt; background: #0B1F3A; color: #fff; padding: 3.5pt 7pt; display: flex; justify-content: space-between; align-items: center; gap: 6pt; }
+.sec h2 { margin: 0; font-size: 1.06em; background: #0B1F3A; color: #fff; padding: 3.5pt 7pt; display: flex; justify-content: space-between; align-items: center; gap: 6pt; }
 .sec.hot h2 { background: #D7262F; }
-.cnt { font-size: 7.5pt; font-weight: 400; opacity: .8; white-space: nowrap; }
+.cnt { font-size: .75em; font-weight: 400; opacity: .8; white-space: nowrap; }
 .cnt::after { content: " 項"; }
-.secnote { margin: 3pt 7pt 0; font-size: 8pt; color: #5B6673; }
+.secnote { margin: 3pt 7pt 0; font-size: .83em; color: #5B6673; }
 ul { list-style: none; margin: 0; padding: 3pt 7pt 4pt; }
 li { display: flex; gap: 6pt; align-items: flex-start; padding: 2.2pt 0; border-bottom: .5pt dotted #D9DEE5; break-inside: avoid; }
 li:last-child { border-bottom: 0; }
-.box { flex: 0 0 9.5pt; height: 9.5pt; border: 1pt solid #0B0F14; border-radius: 1.5pt; margin-top: 1.4pt; background: #fff; }
+.box { flex: 0 0 1em; height: 1em; border: 1pt solid #0B0F14; border-radius: 1.5pt; margin-top: 1.4pt; background: #fff; }
 .txt { flex: 1; }
 .txt b { font-weight: 700; }
-.qty { display: inline-block; margin-left: 5pt; padding: 0 4pt; border-radius: 7pt; background: #F3E3C2; font-size: 8pt; white-space: nowrap; }
-.note { display: block; font-size: 8pt; color: #5B6673; }
+.qty { display: inline-block; margin-left: 5pt; padding: 0 4pt; border-radius: 7pt; background: #F3E3C2; font-size: .83em; white-space: nowrap; }
+.note { display: block; font-size: .83em; color: #5B6673; }
 li.sug .txt b { font-weight: 400; }
 li.sug .box { border-style: dashed; }
 footer { margin-top: 4pt; font-size: 7.5pt; color: #7A8794; }
@@ -42,7 +42,7 @@ footer { margin-top: 4pt; font-size: 7.5pt; color: #7A8794; }
 <footer>依 2026 FXT 選手手冊與團隊補給計畫（${esc(D.version || '')}）整理。數量以補給明細為準；以 11/12 賽前說明會公布內容為最終依據。</footer>
 </body></html>`;
 (async () => {
-  const htmlPath = path.join(path.dirname(SRC), 'checklist.html');
+  const htmlPath = SRC.replace(/\.json$/, '.html');
   fs.writeFileSync(htmlPath, html);
   const browser = await chromium.launch();
   const page = await browser.newPage();
