@@ -7,7 +7,7 @@ const OUT = process.argv[3] || path.join(__dirname, '..', '2026_FXT_行李核對
 const D = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const total = D.sections.reduce((n, s) => n + s.items.length, 0);
-const item = it => `<li class="${it.s ? 'sug' : ''}"><span class="box"></span><span class="txt"><b>${it.s ? '＊' : ''}${esc(it.t)}</b>${it.q ? `<span class="qty">${esc(it.q)}</span>` : ''}${it.n ? `<span class="note">${esc(it.n)}</span>` : ''}</span></li>`;
+const item = it => `<li class="${it.s ? 'sug' : ''}"><span class="box"></span><span class="txt"><b>${it.s ? '＊' : ''}${esc(it.t)}</b>${it.q ? `<span class="qty">${esc(it.q)}</span>` : ''}${it.new ? '<span class="new">新</span>' : ''}${it.n ? `<span class="note">${esc(it.n)}</span>` : ''}</span></li>`;
 const section = s => `<section class="sec ${s.id === 'last' ? 'hot' : ''}"><h2>${esc(s.title)}<span class="cnt">${s.items.length}</span></h2>${s.note ? `<p class="secnote">${esc(s.note)}</p>` : ''}<ul>${s.items.map(item).join('')}</ul></section>`;
 const html = `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><style>
 @page { size: A4; margin: 12mm 11mm 13mm 11mm; }
@@ -33,11 +33,12 @@ li:last-child { border-bottom: 0; }
 .txt b { font-weight: 700; }
 .qty { display: inline-block; margin-left: 5pt; padding: 0 4pt; border-radius: 7pt; background: #F3E3C2; font-size: .83em; white-space: nowrap; }
 .note { display: block; font-size: .83em; color: #5B6673; }
+.new { display: inline-block; margin-left: 5pt; padding: 0 3.5pt; border-radius: 3pt; background: #D7262F; color: #fff; font-size: .72em; font-weight: 700; }
 li.sug .txt b { font-weight: 400; }
 li.sug .box { border-style: dashed; }
 footer { margin-top: 4pt; font-size: 7.5pt; color: #7A8794; }
 </style></head><body>
-<header><div><h1>${esc(D.title)}</h1><div class="sub">${esc(D.subtitle)}・共 ${total} 項</div></div><div class="legend">${esc(D.legend).replace('　', '<br>')}</div></header>
+<header><div><h1>${esc(D.title)}</h1><div class="sub">${esc(D.subtitle)}・共 ${total} 項</div></div><div class="legend">${esc(D.legend).split('　').join('<br>')}</div></header>
 <div class="cols">${D.sections.map(section).join('')}</div>
 <footer>依 2026 FXT 選手手冊與團隊補給計畫（${esc(D.version || '')}）整理。數量以補給明細為準；以 11/12 賽前說明會公布內容為最終依據。</footer>
 </body></html>`;
