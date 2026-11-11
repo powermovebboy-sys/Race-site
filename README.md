@@ -6,7 +6,7 @@
 - 研究整理：[`research/FXT_2026_研究整理.md`](research/FXT_2026_研究整理.md)（手冊事實、與原簡報比對、待確認）；附錄：[`research/FXT_2026_網路研究附錄.md`](research/FXT_2026_網路研究附錄.md)（網路公開資料、歷屆、地理、安全、來源 URL）
 - 手寫列印版：[`deck/2026_FXT_手寫列印版.pdf`](deck/2026_FXT_手寫列印版.pdf)（A4 橫式白底 2 頁：給大頭的一句話、緊急聯絡與關門速查；`node deck/src/build_print.js` 重新產生）
 - 教練（002 謝漢霖）比賽日簡報：[`deck/coach/2026_FXT_002_比賽日.pptx`](deck/coach/2026_FXT_002_比賽日.pptx)（17 頁，一頁一個時間；文案在 `deck/coach/copy.json`，照片在 `deck/coach/photos/`；`node deck/src/build_coach.js` 重新產生）
-- 選手本人行李核對清單：[`deck/2026_FXT_行李核對清單.pdf`](deck/2026_FXT_行李核對清單.pdf)（A4 直式 2 頁；資料在 `deck/checklist/checklist_athlete.json`，`node deck/src/build_checklist.js` 重新產生；`checklist_team.json` 為團隊版參考資料）
+- 選手本人行李核對清單：[`deck/2026_FXT_行李核對清單.pdf`](deck/2026_FXT_行李核對清單.pdf)（A4 直式 2 頁；資料在 `deck/checklist/checklist_athlete.json`，`node deck/src/build_checklist.js` 重新產生；`checklist_team.json` 為團隊版參考資料；手機可勾選版由 `node deck/src/build_checklist_page.js` 產生後發布為 Artifact 頁面）
 - 產生器原始碼：[`deck/src/`](deck/src/)（pptxgenjs，可重新產生整份簡報）
 
 ## 簡報結構
